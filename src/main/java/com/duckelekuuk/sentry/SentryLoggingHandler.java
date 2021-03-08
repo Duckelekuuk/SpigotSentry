@@ -1,11 +1,9 @@
 package com.duckelekuuk.sentry;
 
 import io.sentry.Hub;
-import io.sentry.SentryLevel;
 import lombok.Getter;
 
 import java.util.logging.Handler;
-import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
 public class SentryLoggingHandler extends Handler {
@@ -19,8 +17,6 @@ public class SentryLoggingHandler extends Handler {
 
     @Override
     public void publish(LogRecord record) {
-        if (record.getLevel().intValue() < convertLevel(hub.getOptions().getDiagnosticLevel()).intValue()) return;
-        
         if (record.getThrown() != null) {
             hub.captureException(record.getThrown());
         }
@@ -36,17 +32,4 @@ public class SentryLoggingHandler extends Handler {
         hub.close();
     }
 
-    public static Level convertLevel(SentryLevel sentryLevel) {
-        switch (sentryLevel) {
-            case INFO:
-            case DEBUG:
-                return Level.INFO;
-            case WARNING:
-                return Level.WARNING;
-            case ERROR:
-            case FATAL:
-                return Level.SEVERE;
-        }
-        return Level.INFO;
-    }
 }
