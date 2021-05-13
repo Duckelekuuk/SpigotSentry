@@ -1,10 +1,8 @@
-package com.duckelekuuk.sentry;
+package nl.dusdavidgames.sentry;
 
 import io.sentry.Hub;
-import io.sentry.Sentry;
 import io.sentry.SentryOptions;
 import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Consumer;
 

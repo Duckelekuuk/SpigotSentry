@@ -1,12 +1,10 @@
-package com.duckelekuuk.sentry;
+package nl.dusdavidgames.sentry;
 
 import io.sentry.protocol.SentryId;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 
 import java.util.logging.Handler;
-import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
 /**
@@ -51,8 +49,7 @@ public class GlobalSentryLogger extends Handler {
 
         // Check if plugin has a logger attached to it
         if (handler == null) return;
-        SentryId sentryId = handler.getHub().captureException(record.getThrown());
-        System.out.println(sentryId.toString());
+        handler.getHub().captureException(record.getThrown());
     }
 
     @Override

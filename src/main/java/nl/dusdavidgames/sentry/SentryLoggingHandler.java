@@ -1,4 +1,4 @@
-package com.duckelekuuk.sentry;
+package nl.dusdavidgames.sentry;
 
 import io.sentry.Hub;
 import lombok.Getter;
