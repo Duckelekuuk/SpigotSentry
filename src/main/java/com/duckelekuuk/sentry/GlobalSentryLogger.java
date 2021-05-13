@@ -1,5 +1,6 @@
 package com.duckelekuuk.sentry;
 
+import io.sentry.protocol.SentryId;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -31,13 +32,14 @@ public class GlobalSentryLogger extends Handler {
 
     @Override
     public void publish(LogRecord record) {
-        if (!record.getLevel().equals(Level.SEVERE)) return;
         if (record.getThrown() == null) return;
-        if (record.getMessage().startsWith("Could not pass event")) return;
+        if (!record.getMessage().startsWith("Could not pass event")) return;
+
 
         // Split message to find plugin name
         String[] splitMessage = record.getMessage().split(" to ");
         if (splitMessage.length <= 1) return;
+
 
         // Message contains "fullName" so we get the last split from the array and split the fullName
         // Example of fullName "sentry-logger v1.0.0"
@@ -49,7 +51,8 @@ public class GlobalSentryLogger extends Handler {
 
         // Check if plugin has a logger attached to it
         if (handler == null) return;
-        handler.getHub().captureException(record.getThrown());
+        SentryId sentryId = handler.getHub().captureException(record.getThrown());
+        System.out.println(sentryId.toString());
     }
 
     @Override

@@ -1,3 +1,0 @@
-name: SentryTest
-version: ${project.version}
-main: nl.dusdavidgames.sentrytest.SentryTest
