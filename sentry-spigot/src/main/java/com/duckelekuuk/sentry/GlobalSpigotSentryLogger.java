@@ -1,6 +1,5 @@
-package nl.dusdavidgames.sentry;
+package com.duckelekuuk.sentry;
 
-import io.sentry.protocol.SentryId;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 
@@ -13,14 +12,14 @@ import java.util.logging.LogRecord;
  *   A exception not captured by the plugin in the listener
  * That exception will go to the global server logger
  */
-public class GlobalSentryLogger extends Handler {
+class GlobalSpigotSentryLogger extends Handler {
 
     @Getter
-    private static GlobalSentryLogger instance;
+    private static GlobalSpigotSentryLogger instance;
 
     static void initialize() {
         if (instance == null) {
-            instance = new GlobalSentryLogger();
+            instance = new GlobalSpigotSentryLogger();
         } else {
             throw new IllegalStateException("Global sentry logger already initialized");
         }
@@ -45,7 +44,7 @@ public class GlobalSentryLogger extends Handler {
         String pluginName = splitMessage[splitMessage.length - 1].split(" ")[0];
 
         // Send thrown exception to the hub belonging to the
-        SentryLoggingHandler handler = BukkitSentryLogger.getHandler(pluginName);
+        SentryLoggingHandler handler = SpigotSentryLogger.getHandler(pluginName);
 
         // Check if plugin has a logger attached to it
         if (handler == null) return;

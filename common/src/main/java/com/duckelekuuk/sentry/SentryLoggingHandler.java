@@ -1,4 +1,4 @@
-package nl.dusdavidgames.sentry;
+package com.duckelekuuk.sentry;
 
 import io.sentry.Hub;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
-public class SentryLoggingHandler extends Handler {
+class SentryLoggingHandler extends Handler {
 
     @Getter
     private final Hub hub;
